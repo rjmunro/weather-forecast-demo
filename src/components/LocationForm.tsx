@@ -9,7 +9,12 @@ export function LocationForm({ value, setValue }: Props) {
   const [current, setCurrent] = useState(value);
 
   return (
-    <form>
+    <form
+      onSubmit={(e) => {
+        setValue(current);
+        e.preventDefault();
+      }}
+    >
       <label>
         Location:
         <input
@@ -18,16 +23,10 @@ export function LocationForm({ value, setValue }: Props) {
           onChange={(e) => {
             setCurrent(e.target.value);
           }}
+          placeholder="Enter a location..."
         />
       </label>
-      <button
-        type="button"
-        onClick={() => {
-          setValue(current);
-        }}
-      >
-        Search
-      </button>
+      <button type="submit">Search</button>
     </form>
   );
 }

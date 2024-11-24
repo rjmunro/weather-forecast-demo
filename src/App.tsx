@@ -9,6 +9,7 @@ function App() {
   return (
     <>
       <LocationForm value={searchTerm} setValue={setSearchTerm} />
+      <p>{searchTerm}</p>
     </>
   );
 }
