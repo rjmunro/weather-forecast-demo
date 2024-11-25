@@ -14,7 +14,11 @@ function App() {
   return (
     <>
       <LocationForm value={searchTerm} setValue={setSearchTerm} />
-      <LocationResults searchTerm={searchTerm} setLocation={setLocation} />
+      <LocationResults
+        searchTerm={searchTerm}
+        location={location}
+        setLocation={setLocation}
+      />
       {location ? (
         <>
           <h2>

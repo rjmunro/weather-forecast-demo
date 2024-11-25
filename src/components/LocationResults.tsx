@@ -1,5 +1,7 @@
 import { LocationResult, useLocationQuery } from "../queries/LocationQuery";
 
+import "./LocationResults.css";
+
 function joinAdminNames(row: LocationResult): [string] {
   return [row.admin4, row.admin3, row.admin2, row.admin1].filter(
     (i) => i && i != ""
@@ -8,10 +10,11 @@ function joinAdminNames(row: LocationResult): [string] {
 
 interface props {
   searchTerm: string;
+  location?: LocationResult;
   setLocation: (location: LocationResult) => void;
 }
 
-export function LocationResults({ searchTerm, setLocation }: props) {
+export function LocationResults({ searchTerm, location, setLocation }: props) {
   const {
     isLoading,
     error,
@@ -28,6 +31,7 @@ export function LocationResults({ searchTerm, setLocation }: props) {
         <ul className="resultList">
           {data?.map((row) => (
             <li
+              className={row.id==location?.id ? "selected" : undefined}
               key={row.id}
               onClick={() => {
                 setLocation(row);
