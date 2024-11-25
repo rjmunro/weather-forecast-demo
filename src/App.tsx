@@ -3,6 +3,7 @@ import { QueryClient, useQuery } from "react-query";
 
 import "./App.css";
 import { LocationForm } from "./components/LocationForm";
+import { WeatherComponent } from "./components/WeatherComponent";
 
 interface LocationResult {
   id: number;
@@ -35,6 +36,7 @@ function joinAdminNames(row: LocationResult): [string] {
 
 function App() {
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [location, setLocation] = useState<[number, number]>();
 
   const {
     isLoading: searchLoading,
@@ -69,15 +71,22 @@ function App() {
         ) : searchError ? (
           <p>Error: {searchError.message ?? "Unknown error"}</p>
         ) : (
-          <ul>
+          <ul className="resultList">
             {searchData?.map((row) => (
-              <li>
-                <b>{row.name}</b>, {joinAdminNames(row).join(", ")}, {row.country}
+              <li
+                key={row.id}
+                onClick={() => { setLocation([row.latitude, row.longitude]); }}
+              >
+                <span className="placeName">{row.name}</span>, {joinAdminNames(row).join(", ")},{" "}
+                <span className="country">{row.country}</span>
               </li>
             ))}
           </ul>
         )}
       </div>
+      {location ? (
+        <WeatherComponent latitude={location[0]} longitude={location[1]} />
+      ) : null}
     </>
   );
 }
