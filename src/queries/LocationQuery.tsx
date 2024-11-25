@@ -24,7 +24,7 @@ export interface LocationResult {
 }
 
 export function useLocationQuery(searchTerm: string) {
-  return useQuery<LocationResult[]>(
+  return useQuery<LocationResult[], Error>(
     ["locationSearch", searchTerm],
 
     async () => {

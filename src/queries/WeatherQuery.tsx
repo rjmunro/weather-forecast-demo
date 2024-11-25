@@ -19,11 +19,11 @@ interface WeatherResult {
   timezone_abbreviation: string;
   elevation: number;
   daily_units: Record<string, string>;
-  daily: Record<string, string | number>[];
+  daily: Record<string, string[] | number[]>;
 }
 
 export function useWeatherQuery(latitude: number, longitude: number) {
-  return useQuery<DailyWeatherResult[]>(
+  return useQuery<DailyWeatherResult[], Error>(
     ["locationSearch", latitude, longitude],
 
     async () => {
@@ -37,12 +37,11 @@ export function useWeatherQuery(latitude: number, longitude: number) {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const result: WeatherResult = await res.json();
         const days: DailyWeatherResult[] = [];
-        for (let i = 0; i < result.daily["time"].length; i++) {
-          days.push(
-            Object.fromEntries(
-              Object.keys(result.daily_units).map((unit: string) => [unit, result.daily[unit][i]])
-            ) as DailyWeatherResult
+        for (let i = 0; i < result.daily.time.length; i++) {
+          const entries = Object.keys(result.daily_units).map(
+            (unit: string) => [unit, result.daily[unit][i]]
           );
+          days.push(Object.fromEntries(entries) as DailyWeatherResult);
         }
         return days;
       } else {

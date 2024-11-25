@@ -2,9 +2,9 @@ import { LocationResult, useLocationQuery } from "../queries/LocationQuery";
 
 import "./LocationResults.css";
 
-function joinAdminNames(row: LocationResult): [string] {
-  return [row.admin4, row.admin3, row.admin2, row.admin1].filter(
-    (i) => i && i != ""
+function joinAdminNames(row: LocationResult): string[] {
+  return ([row.admin4, row.admin3, row.admin2, row.admin1].filter(
+    (i) => i && i != "") as string[]
   );
 }
 
