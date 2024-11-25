@@ -7,7 +7,7 @@ interface props {
   longitude: number;
 }
 
-const weatherCodes = {
+const weatherCodes:Record<string, string> = {
   "0": "Clear sky",
   "1": "Mainly clear",
   "2": "Partly cloudy",
@@ -50,20 +50,28 @@ export function WeatherComponent({ latitude, longitude }: props) {
       {isLoading ? (
         <p>Loading...</p>
       ) : error ? (
-        <p>Error: {error.message ?? "Unknown error"}</p>
+        <p>Error: {error.message}</p>
       ) : (
         <div className="weather">
           {data?.map((day) => (
             <div key={day.time} className="dailyWeather">
               <DateComponent isoDate={day.time} />
-              <p>{weatherCodes[day.weather_code.toString()]}</p>
+              <p>{weatherCodes[day.weather_code.toString()] ?? "unknown"}</p>
               <p>
                 {day.temperature_2m_min}°C - {day.temperature_2m_max}°C
               </p>
               <p>{day.precipitation_probability_max}% chance of rain</p>
               <p>
-                Wind: {day.wind_speed_10m_max}km/h with gusts of
-                {" " + day.wind_gusts_10m_max}km/h
+                Wind:
+                {" " + day.wind_speed_10m_max.toLocaleString(navigator.language, {
+                  maximumFractionDigits: 1,
+                })}
+                km/h with gusts of
+                {" " +
+                  day.wind_gusts_10m_max.toLocaleString(navigator.language, {
+                    maximumFractionDigits: 1,
+                  })}
+                km/h
               </p>
             </div>
           ))}
