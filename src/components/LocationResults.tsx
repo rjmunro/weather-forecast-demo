@@ -8,7 +8,7 @@ function joinAdminNames(row: LocationResult): [string] {
 
 interface props {
   searchTerm: string;
-  setLocation: (location: [number, number]) => void;
+  setLocation: (location: LocationResult) => void;
 }
 
 export function LocationResults({ searchTerm, setLocation }: props) {
@@ -30,7 +30,7 @@ export function LocationResults({ searchTerm, setLocation }: props) {
             <li
               key={row.id}
               onClick={() => {
-                setLocation([row.latitude, row.longitude]);
+                setLocation(row);
               }}
             >
               <span className="placeName">{row.name}</span>,{" "}
