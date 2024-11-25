@@ -1,7 +1,7 @@
 import { LocationResult, useLocationQuery } from "../queries/LocationQuery";
 
 function joinAdminNames(row: LocationResult): [string] {
-  return [row.admin1, row.admin2, row.admin3, row.admin4].filter(
+  return [row.admin4, row.admin3, row.admin2, row.admin1].filter(
     (i) => i && i != ""
   );
 }
