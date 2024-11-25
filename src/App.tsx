@@ -14,6 +14,7 @@ function App() {
 
   return (
     <>
+      <h1>Reactive weather</h1>
       <LocationForm
         value={searchTerm}
         setValue={(searchTerm) => {
