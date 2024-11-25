@@ -15,10 +15,10 @@ yarn dev
 
 It will tell you the URL to view the dev site, usually <http://localhost:5173/>.
 
-If you don't have yarn, the easiest way to install it is:
+If the yarn command is not found, run the below and try again:
 
 ```bash
-npm install --global yarn
+corepack enable
 ```
 
 ## Set up
@@ -28,9 +28,10 @@ Make sure you have recent versions of NodeJS and Yarn installed.
 Instructions to install NodeJS can be found here: <https://nodejs.org/en/download/package-manager>.
 
 Once Node is installed, you can install Yarn by following instructions here:
-<https://classic.yarnpkg.com/lang/en/docs/install>
+<https://yarnpkg.com/getting-started/install>
 
-The simplest way is usually to run `npm install --global yarn` in your terminal.
+The simplest way is usually to enable corepack, which will then install it automatically. Simply run
+`corepack enable` in your terminal.
 
 Once yarn is installed, you can install the other dependencies for this project by `cd`ing to the
 project root and running `yarn`.
