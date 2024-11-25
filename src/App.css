@@ -30,3 +30,9 @@ ul {
 .country {
   font-weight: bold;
 }
+
+@media not (prefers-color-scheme: light) {
+  .dailyWeather {
+    color: #000;
+  }
+}
